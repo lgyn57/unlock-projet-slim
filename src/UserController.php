@@ -3,19 +3,24 @@ namespace App;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Psr7\Response;
+use Slim\Views\Twig;
 
-class UserController{
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
+class UserController
+{
+  private $view;
 
-    public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface{
-        $user = $this->userService->signUp('test');
-        $payload = json_encode($user);
+  public function __construct(Twig $view, UserService $userService)
+  {
+    $this->view = $view;
+    $this->userService = $userService;
+  }
 
-        $response->getBody()->write($payload);
-        return $response->withHeader('Content-Type', 'application/json');
-    }
+  public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+  {
+    $user = $this->userService->signUp('test');
+    return $this->view->render($response, 'hello.twig', [
+      'name' => 'me',
+    ]);
+    return $response;
+  }
 }

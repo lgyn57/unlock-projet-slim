@@ -1,6 +1,5 @@
 <?php
 
-// src/Domain/User.php
 namespace App\Domain;
 
 use DateTimeImmutable;
@@ -43,4 +42,3 @@ final class User
         return $this->registeredAt;
     }
 }
-

@@ -20,6 +20,11 @@ return [
             'logErrorDetails' => true,
         ],
 
+        'logger' =>[
+            'name' => 'app',
+            'path' => APP_ROOT . '/logs/app.log',
+        ],
+
         'doctrine' => [
             // Enables or disables Doctrine metadata caching
             // for either performance or convenience during development.
@@ -46,7 +51,7 @@ return [
                 'dbname' => 'test',
                 'user' => 'test',
                 'password' => 'test',
-              //  'charset' => 'utf-8'
+                // 'charset' => 'UTF-8'
             ]
         ]
     ]
