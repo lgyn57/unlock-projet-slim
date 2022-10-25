@@ -16,13 +16,65 @@ use Doctrine\ORM\Mapping\JoinColumn;
 final class Card
 {
     #[Id, Column(type: 'string')]
-    private int $id;
+    private string $id;
+
 
     #[Column(type: 'string', nullable: false)]
     private $color;
 
+    #[Column(type: 'boolean', nullable: false, options: ['default' => false])]
+    private $discarded;
+
+    #[Column(type: 'boolean', nullable: false, options: ['default' => false])]
+    private $returned;
+
+
     #[ManyToOne(targetEntity: Game::class, inversedBy: 'returnedCard')]
     #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
+
+    public function __construct(int $id,string $color, Game $game)
+    {
+        $this->id = $id;
+        $this->color = $color;
+        $this->game = $game;
+
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function getColor(): string
+    {
+        return $this->color;
+    }
+
+    public function getGame(): Game
+    {
+        return $this->game;
+    }
+
+    public function getDiscarded(): bool
+    {
+        return $this->discarded;
+    }
+
+    public function getReturned(): bool
+    {
+        return $this->returned;
+    }
+
+    public function setDiscarded(bool $discarded): void
+    {
+        $this->discarded = $discarded;
+    }
+
+    public function setReturned(bool $returned): void
+    {
+        $this->returned = $returned;
+    }
+
 
 }
