@@ -5,32 +5,22 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
 
-class UserController
+class CardController
 {
   private $view;
 
-  public function __construct(Twig $view, UserService $userService)
+  public function __construct(Twig $view, CardService $cardService)
   {
     $this->view = $view;
-    $this->userService = $userService;
+    $this->cardService = $cardService;
   }
 
   public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
   {
-    $user = $this->userService->signUp('test');
+    $card = $this->cardService->signUp('test');
     return $this->view->render($response, 'hello.twig', [
       'name' => 'me',
     ]);
     return $response;
   }
-
-
-  //fonction defausse automatique
-  //defausse une carte si dans la description de la carte il est dit que l'on peut defausser cette carte
-
-
-  //fonction defausse manuelle
-  //defausse la carte selectionné par le jouer
 }
-
-

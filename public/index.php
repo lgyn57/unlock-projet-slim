@@ -23,4 +23,6 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
 $app->get('/users', \App\UserController::class . ':test');
 
+$app->get('/cards', \App\CardController::class . ':cards');
+
 $app->run();
