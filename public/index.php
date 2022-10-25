@@ -17,8 +17,8 @@ $app->add(TwigMiddleware::createFromContainer($app));
 
 
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
+    return $this->view->render($response, 'hello.html.twig', [
+      ]);
 });
 
 $app->get('/users', \App\UserController::class . ':test');

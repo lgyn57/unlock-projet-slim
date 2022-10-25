@@ -18,7 +18,7 @@ class UserController
   public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
   {
     $user = $this->userService->signUp('test');
-    return $this->view->render($response, 'hello.twig', [
+    return $this->view->render($response, 'hello.html.twig', [
       'name' => 'me',
     ]);
     return $response;

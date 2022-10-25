@@ -1,0 +1,35 @@
+body {
+  background-image: linear-gradient(to right, darkcyan, cadetblue);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  min-height: 100%;
+}
+
+#CinqeA {
+  width: auto;
+  max-height: 100vh;
+}
+
+@media (min-width: 1200px) {
+  .line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+#form-container {
+  width: 35%;
+  padding-right: 5%;
+}
+
+.giant-font {
+  font-size: 3em;
+}
+
+.giant-button {
+  font-size: 2em;
+  width: 10em;
+  height: 4em;
+  box-shadow: 5px 5px 5px black;
+}/*# sourceMappingURL=menu.css.map */
