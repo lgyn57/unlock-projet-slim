@@ -16,10 +16,7 @@ $app = AppFactory::create();
 $app->add(TwigMiddleware::createFromContainer($app));
 
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    return $this->view->render($response, 'hello.html.twig', [
-      ]);
-});
+$app->get('/', \App\UserController::class . ':page');
 
 $app->get('/users', \App\UserController::class . ':test');
 
