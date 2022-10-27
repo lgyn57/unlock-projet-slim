@@ -1,5 +1,13 @@
+@keyframes fondu {
+    from {backdrop-filter: brightness(100%);}
+    to {backdrop-filter: brightness(50%);}
+}
+
 body{
-    background-image: linear-gradient(to right, darkcyan, cadetblue);
+    background-image: url("../template-images/background.png");
+    backdrop-filter: brightness(50%);
+    animation: fondu 2s;
+    animation-iteration-count: 1;
     background-repeat: no-repeat;
     background-size: 100%;
     min-height: 100%;
