@@ -17,10 +17,22 @@ class UserController
 
   public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
   {
-    $user = $this->userService->signUp('test');
-    return $this->view->render($response, 'hello.twig', [
+    $user = $this->userService->signUp('root');
+    return $this->view->render($response, 'hello.html.twig', [
       'name' => 'me',
     ]);
+    return $response;
+  }
+
+  public function page(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+  {
+    return $this->view->render($response, 'menu.html.twig');
+    return $response;
+  }
+
+  public function game(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+  {
+    return $this->view->render($response, 'game.html.twig');
     return $response;
   }
 }

@@ -16,12 +16,8 @@ $app = AppFactory::create();
 $app->add(TwigMiddleware::createFromContainer($app));
 
 
-$app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
-
-$app->get('/users', \App\UserController::class . ':test');
+$app->get('/', \App\UserController::class . ':page');
+$app->get('/game', \App\UserController::class . ':game');
 
 $app->get('/cards/{id}', \App\GameController::class . ':getOne');
 
