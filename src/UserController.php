@@ -29,4 +29,10 @@ class UserController
     return $this->view->render($response, 'menu.html.twig');
     return $response;
   }
+
+  public function game(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+  {
+    return $this->view->render($response, 'game.html.twig');
+    return $response;
+  }
 }

@@ -17,7 +17,6 @@ $app->add(TwigMiddleware::createFromContainer($app));
 
 
 $app->get('/', \App\UserController::class . ':page');
-
-$app->get('/users', \App\UserController::class . ':test');
+$app->get('/game', \App\UserController::class . ':game');
 
 $app->run();

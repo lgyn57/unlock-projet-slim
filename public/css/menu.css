@@ -19,6 +19,10 @@
   }
 }
 body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   background-image: url("../template-images/background.png");
   -webkit-backdrop-filter: brightness(50%);
           backdrop-filter: brightness(50%);
@@ -27,19 +31,18 @@ body {
   -webkit-animation-iteration-count: 1;
           animation-iteration-count: 1;
   background-repeat: no-repeat;
-  background-size: 100%;
-  min-height: 100%;
+  background-size: cover;
 }
 
 #CinqeA {
+  content: url("../template-images/5eavenue.png");
   width: auto;
-  max-height: 100vh;
+  height: 100%;
 }
 
-.line {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.CinqeAC {
+  width: auto;
+  height: 100%;
 }
 
 #form-container {
