@@ -29,7 +29,7 @@ final class Card
     private $returned;
 
 
-    #[ManyToOne(targetEntity: Game::class, inversedBy: 'returnedCard')]
+    #[ManyToOne(targetEntity: Game::class, inversedBy: 'cards')]
     #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
 
@@ -41,7 +41,7 @@ final class Card
 
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }

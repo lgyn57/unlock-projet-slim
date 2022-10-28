@@ -5,11 +5,11 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\Views\Twig;
 
-class CardController
+class GameController
 {
   private $view;
 
-  public function __construct(Twig $view, CardService $gameService)
+  public function __construct(Twig $view, GameService $gameService)
   {
     $this->view = $view;
     $this->gameService = $gameService;
@@ -25,12 +25,18 @@ class CardController
 //   }
 
 
-    public function returnedCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    public function getOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];
-        $card = $this->gameService->returnCard($id);
+        $card = $this->gameService->getCard($id);
+        if($card == null){
+          return $this->view->render($response, 'game.html.twig', [
+            'id' => "card not found",
+        ]);
+        }
+        //var_dump($card->getId());
         return $this->view->render($response, 'game.html.twig', [
-            'id' => 'id',
+            'id' => $card->getId(),
         ]);
         return $response;
     }

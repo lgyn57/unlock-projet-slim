@@ -17,18 +17,12 @@ use Doctrine\ORM\Mapping\OneToMany;
 
 
 #[Entity, Table(name: 'game')]
-final class Game
+class Game
 {
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
     #[OneToMany(targetEntity: Card::class, mappedBy: 'game')]
-    private Collection $discardedCard;
-    
-    #[OneToMany(targetEntity: Card::class, mappedBy: 'game')]
-    private Collection $returnedCard;
-
-
-
+    private Collection $cards;
 
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManager;
 use App\Domain\User;
 use Psr\Log\LoggerInterface;
 
-final class CardService
+final class GameService
 {
     private EntityManager $em;
 
@@ -28,7 +28,7 @@ final class CardService
 
         return $newCard;
     }*/
-    
+
     public function createCard($id,$couleur,$game){
 
         $newCard = new Card($id,$couleur,$game);
@@ -78,14 +78,14 @@ final class CardService
     }
     public function assemble(Card $card1,Card $card2)
     {
-        if ($card1->color == "bleu" && $card2->color =="rouge"|| $card1->couleur == "rouge" && $card2->couleur =="bleu")
+        if ($card1->color == "blue" && $card2->color =="red"|| $card1->couleur == "red" && $card2->couleur =="blue")
         {
             $numeroAssemblage = $card1->numero +$card2->numero;
             return ($numeroAssemblage);
         }
 
-    else if($card1->color =="gris" || $card1->color =="vert" || $card1->color =="jaune" 
-            || $card2->color =="gris" || $card2->color =="vert" || $card2->color =="jaune")
+    else if($card1->color =="grey" || $card1->color =="green" || $card1->color =="yellow" 
+            || $card2->color =="grey" || $card2->color =="green" || $card2->color =="yellow")
         {
             return(0);
         }
