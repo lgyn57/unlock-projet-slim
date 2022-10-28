@@ -36,12 +36,10 @@ body {
   max-height: 100vh;
 }
 
-@media (min-width: 1200px) {
-  .line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #form-container {
