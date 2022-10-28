@@ -1,4 +1,4 @@
-<?php
+<?
 
 namespace App\Domain;
 
@@ -11,10 +11,9 @@ use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
-
 #[Entity, Table(name: 'card')]
-final class Card
-{
+final class Card {
+
     #[Id, Column(type: 'string')]
     private string $id;
 
@@ -33,6 +32,7 @@ final class Card
     #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
     private Game $game;
 
+
     public function __construct(int $id,string $color, Game $game)
     {
         $this->id = $id;
@@ -42,6 +42,7 @@ final class Card
     }
 
     public function getId(): string
+
     {
         return $this->id;
     }
@@ -78,3 +79,4 @@ final class Card
 
 
 }
+

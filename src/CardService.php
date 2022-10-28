@@ -5,6 +5,7 @@ namespace App;
 use App\Domain\Card;
 use Doctrine\ORM\EntityManager;
 use App\Domain\User;
+
 use Psr\Log\LoggerInterface;
 
 final class CardService
@@ -16,6 +17,7 @@ final class CardService
         $this->em = $em;
         $this->logger = $logger;
     }
+
 
    /* public function signUp(string $info): Card
     {
@@ -61,4 +63,22 @@ final class CardService
 
         
     }
+
+    /*
+    public function getFromBase(string $idCard): Card
+    {
+        $query = "SELECT c FROM Card c WHERE c.id LIKE $idCard";
+        return $this->em->createQuery($query)->getResult();
+    }
+
+    public function search(string $idCard){
+        if (getFromBase($idCard != null) {
+            $card = getFromBase($idCard).id;
+            echo "<img src=\"images/"+$card+".png\" alt=\"Dinosaur\" />"
+        else {
+            echo "carte non trouvée";
+            }
+        }
+    } */
+
 }
