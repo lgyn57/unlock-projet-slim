@@ -19,4 +19,8 @@ $app->add(TwigMiddleware::createFromContainer($app));
 $app->get('/', \App\UserController::class . ':page');
 $app->get('/game', \App\UserController::class . ':game');
 
+$app->get('/cards/{id}', \App\GameController::class . ':getOne');
+
+$app->get('/cards', \App\GameController::class . ':getCardsReturned');
+
 $app->run();
