@@ -25,4 +25,6 @@ $app->get('/users', \App\UserController::class . ':test');
 
 $app->get('/cards/{id}', \App\GameController::class . ':getOne');
 
+$app->get('/cards', \App\GameController::class . ':getCardsReturned');
+
 $app->run();

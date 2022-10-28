@@ -40,4 +40,13 @@ class GameController
         ]);
         return $response;
     }
+
+    public function getCardsReturned(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+      $listCards = $this->gameService->getAllReturnedCards();
+      return $this->view->render($response, 'test3.html.twig', [
+          'cards' => $listCards,
+      ]);
+      return $response;
+    }
 }
