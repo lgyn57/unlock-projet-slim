@@ -23,4 +23,8 @@ $app->get('/cards/{id}', \App\GameController::class . ':getOne');
 
 $app->get('/cards', \App\GameController::class . ':getCardsReturned');
 
+$app->get('/cards/discard/{id}', \App\GameController::class . ':discardCard');
+$app->get('/cards/returned/{id}', \App\GameController::class . ':returnCard');
+
+
 $app->run();

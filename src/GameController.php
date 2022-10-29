@@ -49,4 +49,19 @@ class GameController
       ]);
       return $response;
     }
+
+    public function discardCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+      $id = $args['id'];
+      $this->gameService->discard($id);
+      return $response->withHeader('Location', '../../cards')->withStatus(302);
+    }
+
+    public function returnCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+      $id = $args['id'];
+      $this->gameService->returnCard($id);
+      return $response->withHeader('Location', '../../cards')->withStatus(302);
+    }
+
 }

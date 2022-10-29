@@ -24,7 +24,6 @@ class Game
     private int $id;
 
     #[OneToMany(targetEntity: Card::class, mappedBy: 'game')]
-
     private Collection $cards;
 
     public function __construct(int $id)
