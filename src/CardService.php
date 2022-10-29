@@ -28,7 +28,7 @@ final class CardService
 
         return $newCard;
     }*/
-    public function createCard($id,$couleur,$game){
+    /*public function createCard($id,$couleur,$game){
 
         $newCard = new Card($id,$couleur,$game);
 
@@ -38,7 +38,7 @@ final class CardService
         $this->em->flush();
 
         return $newCard;
-    }
+    }*/
 
     public function returnCard($id){
 

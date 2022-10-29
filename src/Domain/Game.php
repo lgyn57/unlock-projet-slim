@@ -19,10 +19,14 @@ use Doctrine\ORM\Mapping\OneToMany;
 #[Entity, Table(name: 'game')]
 class Game
 {
+    private int $game_id;
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
     #[OneToMany(targetEntity: Card::class, mappedBy: 'game')]
     private Collection $cards;
 
+    //recuperer l'id de
+
 }
+

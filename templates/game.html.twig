@@ -1,11 +1,15 @@
 <DOCTYPE! html>
 <html>
     <head>
-        <title>My First Web Page</title>
+        <meta charset="utf-8">
+        <title>{% block title %} My First Web Page{% endblock %}</title>
     </head>
 
     <body>
-        <h1>Test</h1>
-        <p>{{id}}</p>
+        {% block body %}
+        {% block h1 %}<h1>Test</h1>  {% endblock %}
+        {% block p %} <p>{{ids}}</p> {% endblock %}
+        {% block p %} <p>{{id}}</p>  {% endblock %}
+        {% endblock %}
     </body>
 </html>

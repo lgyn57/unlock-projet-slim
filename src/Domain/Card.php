@@ -31,15 +31,20 @@ final class Card
 
     #[ManyToOne(targetEntity: Game::class, inversedBy: 'cards')]
     #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
-    private Game $game;
+    #[Id, Column(type: 'integer')]
+    private int $game;
 
-    public function __construct(int $id,string $color, Game $game)
+
+
+    public function __construct($id,string $color, int $game,$discarded,$returned)
     {
         $this->id = $id;
         $this->color = $color;
+        $this->discarded = $discarded;
+        $this->returned = $returned;
         $this->game = $game;
-
     }
+
 
     public function getId(): string
     {
@@ -51,7 +56,7 @@ final class Card
         return $this->color;
     }
 
-    public function getGame(): Game
+    public function getGame(): int
     {
         return $this->game;
     }
