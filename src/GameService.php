@@ -57,7 +57,15 @@ final class GameService
 
         $i = 55;
         $valueGameId = $test;
-        if($valueGameId > 99)
+        if($valueGameId <= 9)
+        {
+            $valueGameId = intval($gameId[$i]);  
+        }
+        else if($valueGameId >9)
+        {
+            $valueGameId = intval($gameId[$i].$gameId[$i+1]);
+        }
+        else if($valueGameId > 99)
         {
             
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2]);
