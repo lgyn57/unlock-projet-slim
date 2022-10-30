@@ -31,6 +31,43 @@ class GameController
         return $response;
     }
 
+    public function getAll(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $cards = $this->gameService->getAllCards();
+        if($cards == null){
+          return $this->view->render($response, 'game.html.twig', [
+            'ids' => "cards not found",
+        ]);
+        }
+        $liste = [];
+        for($i=0; $i<count($cards); $i++){
+          //var_dump($cards[$i]->getId());
+          array_push($liste,$cards[$i]->getId());
+        }
+        var_dump($liste);
+
+        //verifier que $cards[0]->getId() contient
+        return $this->view->render($response, 'game.html.twig', [
+            'id' => $liste,
+        ]);
+        return $response;
+    }
+
+    public function newGame(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+        $game = $this->gameService->createGame();
+        if($game == null){
+          return $this->view->render($response, 'game.html.twig', [
+            'id' => "game not found",
+        ]);
+        }
+        //var_dump($card->getId());
+        return $this->view->render($response, 'game.html.twig', [
+            'id' =>"game created",
+        ]);
+        return $response;
+    }
+    
     public function getCardsReturned(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
       $listCards = $this->gameService->getAllReturnedCards();

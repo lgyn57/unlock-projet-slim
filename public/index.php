@@ -24,11 +24,15 @@ $app->get('/cards/?cards={id}', \App\GameController::class . ':getOne');
 $app->get('/cards', \App\GameController::class . ':getCardsReturned');
 
 $app->get('/cards/discard/?discard={id}', \App\GameController::class . ':discardCard');
+
 $app->get('/cards/returned/{id}', \App\GameController::class . ':returnCard');
 
 $app->get('/cards/combine?combine_one={id_one}&combine_two={id_two}', \App\GameController::class . ':combineCard');
 
 $app->post('/cards/save', \App\GameController::class . ':saveGame');
 
+$app->get('/cards/all/', \App\GameController::class . ':getAll');
+
+$app->get('/cards', \App\GameController::class . ':newGame');
 
 $app->run();

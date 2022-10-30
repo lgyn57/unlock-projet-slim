@@ -12,11 +12,13 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
 #[Entity, Table(name: 'card')]
-final class Card {
+final class Card
+{
+    #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
+    private int $id;
 
-    #[Id, Column(type: 'string')]
-    private string $id;
-
+    #[Column(type: 'string', nullable: false)]
+    private string $numero_card;
 
     #[Column(type: 'string', nullable: false)]
     private $color;
@@ -33,13 +35,15 @@ final class Card {
     private Game $game;
 
 
-    public function __construct(int $id,string $color, Game $game)
+    public function __construct(string $numero,string $color, $game,$discarded,$returned)
     {
-        $this->id = $id;
         $this->color = $color;
+        $this->discarded = $discarded;
+        $this->returned = $returned;
         $this->game = $game;
-
+        $this->numero_card = $numero;
     }
+
 
     public function getId(): string
 
