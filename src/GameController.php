@@ -15,16 +15,6 @@ class GameController
     $this->gameService = $gameService;
   }
 
-//   public function test(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
-//   {
-//     $card = $this->cardService->signUp('test');
-//     return $this->view->render($response, 'hello.twig', [
-//       'name' => 'me',
-//     ]);
-//     return $response;
-//   }
-
-
     public function getOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];
@@ -100,4 +90,19 @@ class GameController
       $this->gameService->returnCard($id);
       return $response->withHeader('Location', '../../cards')->withStatus(302);
     }
+
+    public function combineCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+      $id_one = $args['id_one'];
+      $id_two = $args['id_two'];
+      $this->gameService->assemblyVerification($id_one, $id_two);
+      return $response->withHeader('Location', '../../cards')->withStatus(302);
+    }
+
+    public function saveGame(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+    {
+      $this->gameService->saveGame();
+      return $response->withHeader('Location', '../../cards')->withStatus(302);
+    }
+
 }
