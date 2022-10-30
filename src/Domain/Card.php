@@ -15,9 +15,11 @@ use Doctrine\ORM\Mapping\JoinColumn;
 #[Entity, Table(name: 'card')]
 final class Card
 {
-    #[Id, Column(type: 'string')]
-    private string $id;
+    #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
+    private int $id;
 
+    #[Column(type: 'string', nullable: false)]
+    private string $numero_card;
 
     #[Column(type: 'string', nullable: false)]
     private $color;
@@ -31,18 +33,17 @@ final class Card
 
     #[ManyToOne(targetEntity: Game::class, inversedBy: 'cards')]
     #[JoinColumn(name: 'game_id', referencedColumnName: 'id')]
-    #[Id, Column(type: 'integer')]
-    private int $game;
+    private Game $game;
 
 
 
-    public function __construct($id,string $color, int $game,$discarded,$returned)
+    public function __construct(string $numero,string $color, $game,$discarded,$returned)
     {
-        $this->id = $id;
         $this->color = $color;
         $this->discarded = $discarded;
         $this->returned = $returned;
         $this->game = $game;
+        $this->numero_card = $numero;
     }
 
 
@@ -56,7 +57,7 @@ final class Card
         return $this->color;
     }
 
-    public function getGame(): int
+    public function getGame(): Game
     {
         return $this->game;
     }

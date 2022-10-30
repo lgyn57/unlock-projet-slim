@@ -30,11 +30,11 @@ final class GameService
         return $newCard;
     }*/
 
-    public function createCard($id,$couleur,$game,$discarded,$returned){
+    public function createCard($numero,$couleur,$game,$discarded,$returned){
 
-        $newCard = new Card($id,$couleur,$game,$discarded,$returned);
+        $newCard = new Card($numero,$couleur,$game,$discarded,$returned);
 
-        $this->logger->info("Card {$id} signed up");
+        $this->logger->info("Card {$numero} signed up");
 
         $this->em->persist($newCard);
         $this->em->flush();
@@ -48,76 +48,30 @@ final class GameService
         $this->em->persist($game);
         $this->em->flush();
         // transforme $game to a string
-        
-
-        $gameId = serialize($game);
-        //var_dump($gameId[55].$gameId[56]);
-        $test =  intval($gameId[55].$gameId[56].$gameId[57].$gameId[58].$gameId[59].$gameId[60].$gameId[61].$gameId[62].$gameId[63]);
-        //var_dump($test);
-
-        $i = 55;
-        $valueGameId = $test;
-        if($valueGameId <= 9)
-        {
-            $valueGameId = intval($gameId[$i]);  
-        }
-        else if($valueGameId >9 && $valueGameId<= 99)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1]);
-        }
-        else if($valueGameId > 99  && $valueGameId <= 999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2]);
-        }
-        else if ($valueGameId > 999  && $valueGameId <= 9999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3]);
-        }
-        else if ($valueGameId > 9999 && $valueGameId <= 99999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4]);
-        }
-        else if ($valueGameId > 99999 && $valueGameId <= 999999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5]);
-        }
-        else if ($valueGameId > 999999 && $valueGameId <= 9999999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6]);
-        }
-        else if ($valueGameId > 9999999 && $valueGameId <= 99999999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6].$gameId[$i+7]);
-        }
-        else if ($valueGameId > 99999999 && $valueGameId <= 999999999)
-        {
-            $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6].$gameId[$i+7].$gameId[$i+8]);
-        }
-        
-        $this->createCard(5,"grey",$valueGameId,false,true);
-        $this->createCard(8,"blue",$valueGameId,false,false);
-        $this->createCard(11,"grey",$valueGameId,false,false);
-        $this->createCard(15,"blue",$valueGameId,false,false);
-        $this->createCard(22,"red",$valueGameId,false,false);
-        $this->createCard(30,"grey",$valueGameId,false,false);
-        $this->createCard(37,"blue",$valueGameId,false,false);
-        $this->createCard(42,"blue",$valueGameId,false,false);
-        $this->createCard(43,"grey",$valueGameId,false,false);
-        $this->createCard(44,"red",$valueGameId,false,false);
-        $this->createCard(52,"grey",$valueGameId,false,false);
-        $this->createCard(58,"red",$valueGameId,false,false);
-        $this->createCard(66,"grey",$valueGameId,false,false);
-        $this->createCard(73,"grey",$valueGameId,false,false);
-        $this->createCard(86,"grey",$valueGameId,false,false);
-        $this->createCard(88,"grey",$valueGameId,false,false);
-        $this->createCard(92,"grey",$valueGameId,false,false);
-        $this->createCard("C","grey",$valueGameId,false,false);
-        $this->createCard("F121","grey",$valueGameId,false,false);
-        $this->createCard("G171","yellow",$valueGameId,false,false);
-        $this->createCard("H161","grey",$valueGameId,false,false);
-        $this->createCard("R131","yellow",$valueGameId,false,false);
-        $this->createCard("V151","grey",$valueGameId,false,false);
-        $this->createCard("W141","green",$valueGameId,false,false);
+        $this->createCard(5,"grey",$game,false,true);
+        $this->createCard(8,"blue",$game,false,false);
+        $this->createCard(11,"grey",$game,false,false);
+        $this->createCard(15,"blue",$game,false,false);
+        $this->createCard(22,"red",$game,false,false);
+        $this->createCard(30,"grey",$game,false,false);
+        $this->createCard(37,"blue",$game,false,false);
+        $this->createCard(42,"blue",$game,false,false);
+        $this->createCard(43,"grey",$game,false,false);
+        $this->createCard(44,"red",$game,false,false);
+        $this->createCard(52,"grey",$game,false,false);
+        $this->createCard(58,"red",$game,false,false);
+        $this->createCard(66,"grey",$game,false,false);
+        $this->createCard(73,"grey",$game,false,false);
+        $this->createCard(86,"grey",$game,false,false);
+        $this->createCard(88,"grey",$game,false,false);
+        $this->createCard(92,"grey",$game,false,false);
+        $this->createCard("C","grey",$game,false,false);
+        $this->createCard("F121","grey",$game,false,false);
+        $this->createCard("G171","yellow",$game,false,false);
+        $this->createCard("H161","grey",$game,false,false);
+        $this->createCard("R131","yellow",$game,false,false);
+        $this->createCard("V151","grey",$game,false,false);
+        $this->createCard("W141","green",$game,false,false);
        // return $game;
         
 
