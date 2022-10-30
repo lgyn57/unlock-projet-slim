@@ -1,4 +1,4 @@
-<?php
+<?
 
 namespace App\Domain;
 
@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
-
 
 #[Entity, Table(name: 'card')]
 final class Card
@@ -36,7 +35,6 @@ final class Card
     private Game $game;
 
 
-
     public function __construct(string $numero,string $color, $game,$discarded,$returned)
     {
         $this->color = $color;
@@ -48,6 +46,7 @@ final class Card
 
 
     public function getId(): string
+
     {
         return $this->id;
     }
@@ -84,3 +83,4 @@ final class Card
 
 
 }
+

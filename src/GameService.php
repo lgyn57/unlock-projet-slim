@@ -95,23 +95,29 @@ final class GameService
     public function returnCard($id){
 
         $card = $this->em->getRepository(Card::class)->find($id); 
-        $card->setReturned(true);
-        $this->em->persist($card);
-        $this->em->flush();
-
-        return $card;
+        if($card != null && $card->getDiscarded() == false){
+            $card->setReturned(true);
+            $this->em->persist($card);
+            $this->em->flush();
+        }else{
+            echo "Impossible de retourner la carte";
+        }
     }
 
     public function discard(string $numero): void
     {
-        $card = $this->em->getRepository(Card::class)->findOneBy(['numero' => $numero]);
-        $card->setDiscarded(true);
-        
-        $this->em->persist($card);
-        $this->em->flush();
-
+        $card = $this->em->getRepository(Card::class)->findOneBy(['id' => $numero]);
+        if($card->getReturned() == true){
+            $card->setDiscarded(true);
+            $card->setReturned(false);
+            $this->em->persist($card);
+            $this->em->flush();
+        }else{
+            echo "Impossible de déffausser une carte qui n'est pas retounée !!";
+        }
         
     }
+
     public function assemble(Card $card1,Card $card2)
     {
         if ($card1->color == "blue" && $card2->color =="red"|| $card1->couleur == "red" && $card2->couleur =="blue")
