@@ -17,6 +17,12 @@ class GameController
     $this->gameService = $gameService;
   }
 
+  public function page(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
+  {
+    return $this->view->render($response, 'menu.html.twig');
+    return $response;
+  }
+  
     public function getOne(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $id = $args['id'];
@@ -42,12 +48,10 @@ class GameController
         }
         $liste = [];
         for($i=0; $i<count($cards); $i++){
-          //var_dump($cards[$i]->getId());
           array_push($liste,$cards[$i]->getId());
         }
         var_dump($liste);
 
-        //verifier que $cards[0]->getId() contient
         return $this->view->render($response, 'game.html.twig', [
             'id' => $liste,
         ]);
@@ -58,16 +62,7 @@ class GameController
     {
         $game = $this->gameService->createGame();
         $this->game_id = $game->getId();
-        // if($game == null){
-        //   return $this->view->render($response, 'game.html.twig', [
-        //     'id' => "game not found",
-        // ]);
-        // }
-        // //var_dump($card->getId());
-        // return $this->view->render($response, 'game.html.twig', [
-        //     'id' =>"game created",
-        // ]);
-        return $response;
+        return $response->withHeader('Location', '../../game')->withStatus(302);
     }
     
     public function getCardsReturned(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface

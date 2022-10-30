@@ -5,7 +5,6 @@ namespace App;
 use App\Domain\Game;
 use App\Domain\Card;
 use Doctrine\ORM\EntityManager;
-use App\Domain\User;
 use Psr\Log\LoggerInterface;
 
 final class GameService
@@ -17,18 +16,6 @@ final class GameService
         $this->em = $em;
         $this->logger = $logger;
     }
-
-   /* public function signUp(string $info): Card
-    {
-        $newCard = new Card($info);
-
-        $this->logger->info("Card {$info} signed up");
-
-        $this->em->persist($newCard);
-        $this->em->flush();
-
-        return $newCard;
-    }*/
 
     public function createCard($numero,$couleur,$game,$discarded,$returned){
 
@@ -77,11 +64,16 @@ final class GameService
     }
 
     public function convertNum($num){
-        $card = $this->em->getRepository(Card::class)->findBy(['numero_card' => $num]);
-        $str = substr(serialize($card[0]),55,60);
-        $str = substr($str,0,strpos($str, ";"));
+    $card = $this->em->getRepository(Card::class)->findBy(['numero_card' => $num]);
+    if ($card != null) {
+        $str = substr(serialize($card[0]), 55, 60);
+        $str = substr($str, 0, strpos($str, ";"));
         return (int)$str;
     }
+    else {
+        return 0;
+    }
+}
 
     public function getAllCards(){
         $cards = $this->em->getRepository(Card::class)->findAll();
@@ -100,27 +92,27 @@ final class GameService
 
     public function returnCard($id){
         $id = self::convertNum($id);
-        $card = $this->em->getRepository(Card::class)->find($id); 
-        if($card != null && $card->getDiscarded() == false){
+            if ($id != 0) {
+            $card = $this->em->getRepository(Card::class)->find($id);
+            if ($card != null && $card->getDiscarded() == false) {
             $card->setReturned(true);
             $this->em->persist($card);
             $this->em->flush();
-        }else{
-            echo "Impossible de retourner la carte veuillez faire un retour arrière";
-        }
+            }
+}
     }
 
     public function discard(string $numero): void
     {
         $numero = self::convertNum($numero);
-        $card = $this->em->getRepository(Card::class)->findOneBy(['id' => $numero]);
-        if($card->getReturned() == true){
-            $card->setDiscarded(true);
-            $card->setReturned(false);
-            $this->em->persist($card);
-            $this->em->flush();
-        }else{
-            echo "Impossible de déffausser une carte qui n'est pas retounée !!";
+        if ($numero != 0) {
+            $card = $this->em->getRepository(Card::class)->findOneBy(['id' => $numero]);
+            if ($card->getReturned() == true) {
+                $card->setDiscarded(true);
+                $card->setReturned(false);
+                $this->em->persist($card);
+                $this->em->flush();
+            }
         }
         
     }
@@ -144,10 +136,10 @@ final class GameService
 
     public function assemblyVerification($numero1,$numero2)
     {
-        $numero1 = self::convertNum($numero1);
-        $numero2 = self::convertNum($numero2);
-        $card1 = $this->em->getRepository(Card::class)->find($numero1);
-        $card2 = $this->em->getRepository(Card::class)->find($numero2);
+        $num1 = self::convertNum($numero1);
+        $num2 = self::convertNum($numero2);
+        $card1 = $this->em->getRepository(Card::class)->find($num1);
+        $card2 = $this->em->getRepository(Card::class)->find($num2);
 
         if($card1 != null && $card2 != null)
         {
@@ -155,20 +147,20 @@ final class GameService
 
         }else if($card1 == null && $card2 != null)
         {
-            $assemblyNumber = $numero1 + $card2->numero;
+            $assemblyNumber = $numero1 + $card2->getNumeroCard();
 
         } else if($card1 != null && $card2 == null)
         {
-            $assemblyNumber = $card1->numero + $numero2;
+            $assemblyNumber = $card1->getNumeroCard() + $numero2;
+
         }
 
         if($assemblyNumber != 0)
             {
                 $this->returnCard($assemblyNumber);
-            }else{
-                echo "Assemblage impossible veuillez faire un retour arrière";
             }
-    }
+    
+}
     
 
     public function getCard($id){

@@ -9,8 +9,7 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use UMA\DIC\Container;
-use App\UserService;
-use App\UserController;
+
 use App\GameService;
 use App\GameController;
 
@@ -60,14 +59,6 @@ $container->set('view', function () {
     );
 });
 
-$container->set(UserService::class, static function (Container $c) {
-    return new UserService($c->get(EntityManager::class), $c->get(LoggerInterface::class));
-});
-
-$container->set(UserController::class, static function (ContainerInterface $container) {
-    $view = $container->get('view');
-    return new UserController($view, $container->get(UserService::class));
-});
 
 $container->set(GameService::class, static function (Container $c) {
     return new GameService($c->get(EntityManager::class), $c->get(LoggerInterface::class));
