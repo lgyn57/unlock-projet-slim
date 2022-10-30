@@ -17,22 +17,26 @@ $app->add(TwigMiddleware::createFromContainer($app));
 
 
 $app->get('/', \App\UserController::class . ':page');
-$app->get('/game', \App\UserController::class . ':game');
 
-$app->get('/cards/?cards={id}', \App\GameController::class . ':getOne');
+$app->get('/load', \App\GameController::class . ':newGame');
 
-$app->get('/cards', \App\GameController::class . ':getCardsReturned');
+$app->get('/game', \App\GameController::class . ':getCardsReturned');
+// $app->get('/game', \App\UserController::class . ':game');
 
-$app->get('/cards/discard/?discard={id}', \App\GameController::class . ':discardCard');
+// $app->get('/cards/?cards={id}', \App\GameController::class . ':getOne');
 
-$app->get('/cards/returned/{id}', \App\GameController::class . ':returnCard');
+// $app->get('/cards', \App\GameController::class . ':getCardsReturned');
+$app->post('/game/return', \App\GameController::class . ':returnCard');
 
-$app->get('/cards/combine?combine_one={id_one}&combine_two={id_two}', \App\GameController::class . ':combineCard');
+$app->post('/game/combine', \App\GameController::class . ':combineCard');
+
+$app->post('/game/discard', \App\GameController::class . ':discardCard');
 
 $app->post('/cards/save', \App\GameController::class . ':saveGame');
 
 $app->get('/cards/all/', \App\GameController::class . ':getAll');
 
-$app->get('/cards', \App\GameController::class . ':newGame');
+
+
 
 $app->run();

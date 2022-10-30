@@ -53,6 +53,7 @@ final class GameService
         $this->createCard(11,"grey",$game,false,false);
         $this->createCard(15,"blue",$game,false,false);
         $this->createCard(22,"red",$game,false,false);
+        $this->createCard(25,"red",$game,false,false);
         $this->createCard(30,"grey",$game,false,false);
         $this->createCard(37,"blue",$game,false,false);
         $this->createCard(42,"blue",$game,false,false);
@@ -66,15 +67,20 @@ final class GameService
         $this->createCard(88,"grey",$game,false,false);
         $this->createCard(92,"grey",$game,false,false);
         $this->createCard("C","grey",$game,false,false);
-        $this->createCard("F121","grey",$game,false,false);
-        $this->createCard("G171","yellow",$game,false,false);
-        $this->createCard("H161","grey",$game,false,false);
-        $this->createCard("R131","yellow",$game,false,false);
-        $this->createCard("V151","grey",$game,false,false);
-        $this->createCard("W141","green",$game,false,false);
-       // return $game;
-        
+        $this->createCard("F","grey",$game,false,false);
+        $this->createCard("G","yellow",$game,false,false);
+        $this->createCard("H","grey",$game,false,false);
+        $this->createCard("R","yellow",$game,false,false);
+        $this->createCard("V","grey",$game,false,false);
+        $this->createCard("W","green",$game,false,false);
+        return $game;
+    }
 
+    public function convertNum($num){
+        $card = $this->em->getRepository(Card::class)->findBy(['numero_card' => $num]);
+        $str = substr(serialize($card[0]),55,60);
+        $str = substr($str,0,strpos($str, ";"));
+        return (int)$str;
     }
 
     public function getAllCards(){
@@ -93,19 +99,20 @@ final class GameService
     }
 
     public function returnCard($id){
-
+        $id = self::convertNum($id);
         $card = $this->em->getRepository(Card::class)->find($id); 
         if($card != null && $card->getDiscarded() == false){
             $card->setReturned(true);
             $this->em->persist($card);
             $this->em->flush();
         }else{
-            echo "Impossible de retourner la carte";
+            echo "Impossible de retourner la carte veuillez faire un retour arrière";
         }
     }
 
     public function discard(string $numero): void
     {
+        $numero = self::convertNum($numero);
         $card = $this->em->getRepository(Card::class)->findOneBy(['id' => $numero]);
         if($card->getReturned() == true){
             $card->setDiscarded(true);
@@ -118,26 +125,27 @@ final class GameService
         
     }
 
-    public function assemble(Card $card1,Card $card2)
+    public function assemble($card1, $card2)
     {
-        if ($card1->color == "blue" && $card2->color =="red"|| $card1->couleur == "red" && $card2->couleur =="blue")
+        if ($card1->getColor() == "blue" && $card2->getColor() =="red"|| $card1->getColor() == "red" && $card2->getColor() =="blue")
+            {
+                return $card1->getNumeroCard() +$card2->getNumeroCard();
+            }
+        else if ($card1->getColor() == null || $card2->getColor() == null)
         {
-            $numeroAssemblage = $card1->numero +$card2->numero;
-            return ($numeroAssemblage);
+            return $card1->getNumeroCard() + $card2->getNumeroCard();
         }
-
-    else if($card1->color =="grey" || $card1->color =="green" || $card1->color =="yellow" 
-            || $card2->color =="grey" || $card2->color =="green" || $card2->color =="yellow")
-        {
-            return(0);
-        }
-
-    
+        else if($card1->getColor() =="grey" || $card1->getColor() =="green" || $card1->getColor() =="yellow" 
+                   || $card2->getColor() =="grey" || $card2->getColor() =="green" || $card2->getColor() =="yellow")
+            {
+                return(0);
+            }
     }
 
     public function assemblyVerification($numero1,$numero2)
     {
-    
+        $numero1 = self::convertNum($numero1);
+        $numero2 = self::convertNum($numero2);
         $card1 = $this->em->getRepository(Card::class)->find($numero1);
         $card2 = $this->em->getRepository(Card::class)->find($numero2);
 
@@ -158,7 +166,7 @@ final class GameService
             {
                 $this->returnCard($assemblyNumber);
             }else{
-                echo "Assemblage impossible";
+                echo "Assemblage impossible veuillez faire un retour arrière";
             }
     }
     
@@ -174,5 +182,5 @@ final class GameService
         $this->em->flush();
     }
 
-   
+
 }

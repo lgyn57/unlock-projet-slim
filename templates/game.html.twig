@@ -11,27 +11,27 @@
 <div class="carte">
 
 {% for card in cards %}
-  <img src="img/{{ card.id }}.png" alt="{{ card.id }}">
+  <img src="img/{{card}}.png" alt="{{ card }}">
 {% endfor %}
 
 </div>
-<form action="/cards" method="get">
+<form action="/game/return" method="post">
 <h3>Piocher une carte</h3>
 <label for="cards">Numéro de carte</label>     
-<input class="input" type="text" id="cards" name="cards" required
+<input class="input" type="text" id="cards" name="numero_card" required
 minlength="1" maxlength="5" size="10">
 <input type="submit" value="Valider">
 </form>
-<form action="/cards/discard" method="get">
+<form action="/game/discard" method="post">
 <label for="discard">Défausse</label>
 <input class="input" type="text" id="discard" name="discard" required
 minlength="1" maxlength="5" size="10">
 <input type="submit" value="Confirmer défausse">
 </form>
 
-<form action="/cards/combine" method="get">
+<form action="/game/combine" method="post">
     <h3>Combiner 2 cartes</h3>
-    <label for="ombine_one">Carte 1</label> 
+    <label for="combine_one">Carte 1</label> 
     <input class="input" type="text" id="combine_one" name="combine_one" required
 minlength="1" maxlength="5" size="10">
     <label for="combine_two">Carte 2</label> 

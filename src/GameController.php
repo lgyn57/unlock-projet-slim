@@ -3,11 +3,13 @@ namespace App;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\App;
 use Slim\Views\Twig;
 
 class GameController
 {
   private $view;
+  public $game_id;
 
   public function __construct(Twig $view, GameService $gameService)
   {
@@ -24,7 +26,6 @@ class GameController
             'id' => "card not found",
         ]);
         }
-        //var_dump($card->getId());
         return $this->view->render($response, 'game.html.twig', [
             'id' => $card->getId(),
         ]);
@@ -56,22 +57,23 @@ class GameController
     public function newGame(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
         $game = $this->gameService->createGame();
-        if($game == null){
-          return $this->view->render($response, 'game.html.twig', [
-            'id' => "game not found",
-        ]);
-        }
-        //var_dump($card->getId());
-        return $this->view->render($response, 'game.html.twig', [
-            'id' =>"game created",
-        ]);
+        $this->game_id = $game->getId();
+        // if($game == null){
+        //   return $this->view->render($response, 'game.html.twig', [
+        //     'id' => "game not found",
+        // ]);
+        // }
+        // //var_dump($card->getId());
+        // return $this->view->render($response, 'game.html.twig', [
+        //     'id' =>"game created",
+        // ]);
         return $response;
     }
     
     public function getCardsReturned(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
       $listCards = $this->gameService->getAllReturnedCards();
-      return $this->view->render($response, 'test3.html.twig', [
+      return $this->view->render($response, 'game.html.twig', [
           'cards' => $listCards,
       ]);
       return $response;
@@ -79,30 +81,30 @@ class GameController
 
     public function discardCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-      $id = $args['id'];
+      $id = $_POST["discard"];
       $this->gameService->discard($id);
-      return $response->withHeader('Location', '../../cards')->withStatus(302);
+      return $response->withHeader('Location', '../../game')->withStatus(302);
     }
 
     public function returnCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-      $id = $args['id'];
+      $id = $_POST['numero_card'];
       $this->gameService->returnCard($id);
-      return $response->withHeader('Location', '../../cards')->withStatus(302);
+      return $response->withHeader('Location', '../../game')->withStatus(302);
     }
 
     public function combineCard(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
-      $id_one = $args['id_one'];
-      $id_two = $args['id_two'];
+      $id_one = $_POST['combine_one'];
+      $id_two = $_POST['combine_two'];
       $this->gameService->assemblyVerification($id_one, $id_two);
-      return $response->withHeader('Location', '../../cards')->withStatus(302);
+      return $response->withHeader('Location', '../../game')->withStatus(302);
     }
 
     public function saveGame(ServerRequestInterface $request, ResponseInterface $response, array $args): ResponseInterface
     {
       $this->gameService->saveGame();
-      return $response->withHeader('Location', '../../cards')->withStatus(302);
+      return $response->withHeader('Location', '../../game')->withStatus(302);
     }
 
 }
