@@ -25,10 +25,8 @@ class Game
     #[OneToMany(targetEntity: Card::class, mappedBy: 'game')]
     private Collection $cards;
 
-    public function __construct(int $id)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->cards[] = [];
     }
 
     public function getId(): int
@@ -36,22 +34,22 @@ class Game
         return $this->id;
     }
 
-    public function getCards(): array
-    {
-        return $this->cards;
-    }
+    // public function getCards(): array
+    // {
+    //     return $this->cards;
+    // }
 
-    public function addCard(int $idCard): array
-    {
-        array_push($this->cards, $idCard);
-        return $this->cards;
-    }
+    // public function addCard(int $idCard): array
+    // {
+    //     array_push($this->cards, $idCard);
+    //     return $this->cards;
+    // }
 
-    public function removeCard(int $idCard): array
-    {
-        $key = array_search($idCard, $this->cards);
-        unset($this->cards[$key]);
-        return $this->cards;
-    }
+    // public function removeCard(int $idCard): array
+    // {
+    //     $key = array_search($idCard, $this->cards);
+    //     unset($this->cards[$key]);
+    //     return $this->cards;
+    // }
 }
 

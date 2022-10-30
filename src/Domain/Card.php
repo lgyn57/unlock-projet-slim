@@ -18,7 +18,7 @@ final class Card
     private int $id;
 
     #[Column(type: 'string', nullable: false)]
-    private string $numero_card;
+    private $numero_card;
 
     #[Column(type: 'string', nullable: false)]
     private $color;
@@ -81,6 +81,15 @@ final class Card
         $this->returned = $returned;
     }
 
+    public function getNumeroCard(): string
+    {
+        return $this->numero_card;
+    }
+
+    public function __toString()
+    {
+        return $this->numero_card;
+    }
 
 }
 
