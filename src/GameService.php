@@ -51,9 +51,9 @@ final class GameService
         
 
         $gameId = serialize($game);
-        var_dump($gameId[55].$gameId[56]);
+        //var_dump($gameId[55].$gameId[56]);
         $test =  intval($gameId[55].$gameId[56].$gameId[57].$gameId[58].$gameId[59].$gameId[60].$gameId[61].$gameId[62].$gameId[63]);
-        var_dump($test);
+        //var_dump($test);
 
         $i = 55;
         $valueGameId = $test;
@@ -61,36 +61,35 @@ final class GameService
         {
             $valueGameId = intval($gameId[$i]);  
         }
-        else if($valueGameId >9)
+        else if($valueGameId >9 && $valueGameId<= 99)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1]);
         }
-        else if($valueGameId > 99)
+        else if($valueGameId > 99  && $valueGameId <= 999)
         {
-            
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2]);
         }
-        else if ($valueGameId > 999)
+        else if ($valueGameId > 999  && $valueGameId <= 9999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3]);
         }
-        else if ($valueGameId > 9999)
+        else if ($valueGameId > 9999 && $valueGameId <= 99999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4]);
         }
-        else if ($valueGameId > 99999)
+        else if ($valueGameId > 99999 && $valueGameId <= 999999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5]);
         }
-        else if ($valueGameId > 999999)
+        else if ($valueGameId > 999999 && $valueGameId <= 9999999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6]);
         }
-        else if ($valueGameId > 9999999)
+        else if ($valueGameId > 9999999 && $valueGameId <= 99999999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6].$gameId[$i+7]);
         }
-        else if ($valueGameId > 99999999)
+        else if ($valueGameId > 99999999 && $valueGameId <= 999999999)
         {
             $valueGameId = intval($gameId[$i].$gameId[$i+1].$gameId[$i+2].$gameId[$i+3].$gameId[$i+4].$gameId[$i+5].$gameId[$i+6].$gameId[$i+7].$gameId[$i+8]);
         }
