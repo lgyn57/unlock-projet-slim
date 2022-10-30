@@ -19,7 +19,6 @@ use Doctrine\ORM\Mapping\OneToMany;
 #[Entity, Table(name: 'game')]
 class Game
 {
-
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private int $id;
 
@@ -55,3 +54,4 @@ class Game
         return $this->cards;
     }
 }
+

@@ -21,10 +21,8 @@ $app->get('/game', \App\UserController::class . ':game');
 
 $app->get('/cards/{id}', \App\GameController::class . ':getOne');
 
-$app->get('/cards', \App\GameController::class . ':getCardsReturned');
+$app->get('/cards/all/', \App\GameController::class . ':getAll');
 
-$app->get('/cards/discard/{id}', \App\GameController::class . ':discardCard');
-$app->get('/cards/returned/{id}', \App\GameController::class . ':returnCard');
-
+$app->get('/cards', \App\GameController::class . ':newGame');
 
 $app->run();

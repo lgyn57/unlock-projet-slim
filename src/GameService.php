@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Domain\Game;
 use App\Domain\Card;
 use Doctrine\ORM\EntityManager;
 use App\Domain\User;
@@ -29,16 +30,51 @@ final class GameService
         return $newCard;
     }*/
 
-    public function createCard($id,$couleur,$game){
+    public function createCard($numero,$couleur,$game,$discarded,$returned){
 
-        $newCard = new Card($id,$couleur,$game);
+        $newCard = new Card($numero,$couleur,$game,$discarded,$returned);
 
-        $this->logger->info("Card {$id} signed up");
+        $this->logger->info("Card {$numero} signed up");
 
         $this->em->persist($newCard);
         $this->em->flush();
 
         return $newCard;
+    }
+
+    public function createGame()
+    {
+        $game = new Game();
+        $this->em->persist($game);
+        $this->em->flush();
+        // transforme $game to a string
+        $this->createCard(5,"grey",$game,false,true);
+        $this->createCard(8,"blue",$game,false,false);
+        $this->createCard(11,"grey",$game,false,false);
+        $this->createCard(15,"blue",$game,false,false);
+        $this->createCard(22,"red",$game,false,false);
+        $this->createCard(30,"grey",$game,false,false);
+        $this->createCard(37,"blue",$game,false,false);
+        $this->createCard(42,"blue",$game,false,false);
+        $this->createCard(43,"grey",$game,false,false);
+        $this->createCard(44,"red",$game,false,false);
+        $this->createCard(52,"grey",$game,false,false);
+        $this->createCard(58,"red",$game,false,false);
+        $this->createCard(66,"grey",$game,false,false);
+        $this->createCard(73,"grey",$game,false,false);
+        $this->createCard(86,"grey",$game,false,false);
+        $this->createCard(88,"grey",$game,false,false);
+        $this->createCard(92,"grey",$game,false,false);
+        $this->createCard("C","grey",$game,false,false);
+        $this->createCard("F121","grey",$game,false,false);
+        $this->createCard("G171","yellow",$game,false,false);
+        $this->createCard("H161","grey",$game,false,false);
+        $this->createCard("R131","yellow",$game,false,false);
+        $this->createCard("V151","grey",$game,false,false);
+        $this->createCard("W141","green",$game,false,false);
+       // return $game;
+        
+
     }
 
     public function getAllCards(){
@@ -137,4 +173,6 @@ final class GameService
         $this->em->persist($game);
         $this->em->flush();
     }
+
+   
 }

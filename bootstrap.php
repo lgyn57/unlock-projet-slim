@@ -11,8 +11,9 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use UMA\DIC\Container;
 use App\UserService;
 use App\UserController;
-use App\GameController;
 use App\GameService;
+use App\GameController;
+
 use Monolog\Level;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
